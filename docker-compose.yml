@@ -1,0 +1,62 @@
+version: '3'
+
+services:
+  #################################################
+  # Nginx
+  #################################################
+  nginx:
+    build:
+      context: docker/nginx
+      dockerfile: dockerfile # docker/nginx/dockerfileファイルからイメージを作成
+    container_name: nginx
+    volumes:
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./docker/nginx/log:/var/log/nginx
+      - ./html:/var/www/html
+    ports:
+      - 8080:80
+    depends_on:
+      - php
+  #################################################
+  # PHP
+  #################################################
+  php:
+    build:
+      context: docker/php
+      dockerfile: dockerfile # docker/php/dockerfileファイルからイメージを作成
+    container_name: php
+    volumes:
+      - ./docker/php/php.ini:/usr/local/etc/php/php.ini
+      - ./html:/var/www/html
+  #################################################
+  # MySQL
+  #################################################
+  mysql:
+    image: mysql:5.7
+    container_name: mysql57
+    volumes:
+      - ./docker/mysql/init:/docker-entrypoint-initdb.d # テーブル作成クエリ
+      - ./docker/mysql/data:/var/lib/mysql              # 物理データ
+    ports:
+      - 13306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=test_db
+      - MYSQL_USER=test_user
+      - MYSQL_PASSWORD=test_password
+  #################################################
+  # PhpMyAdmin
+  #################################################
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mysql
+      - PMA_USER=test_user
+      - PMA_PASSWORD=test_password
+    ports:
+      - 8081:80
+    volumes:
+      - ./docker/phpmyadmin/sessions:/sessions
