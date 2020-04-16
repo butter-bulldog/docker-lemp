@@ -57,6 +57,6 @@ services:
       - PMA_USER=test_user
       - PMA_PASSWORD=test_password
     ports:
-      - 8081:80
+      - 8090:80
     volumes:
       - ./docker/phpmyadmin/sessions:/sessions
