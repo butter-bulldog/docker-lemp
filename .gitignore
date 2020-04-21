@@ -122,13 +122,14 @@ fabric.properties
 
 # MySQL
 docker/mysql/data/*
+!docker/mysql/data/.gitkeep
 
 # Nginx
 docker/nginx/log/*
+!docker/nginx/log/.gitkeep
 
 # composer
 html/vendor
-
 
 # End of https://www.gitignore.io/api/macos,phpstorm
 
