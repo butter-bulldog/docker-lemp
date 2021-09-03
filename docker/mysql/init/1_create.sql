@@ -10,4 +10,4 @@ CREATE TABLE test_table
     UNIQUE KEY uk_email (email)
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='テスト用';
-INSERT INTO test_table (email, name) VALUES ('a.jp', 'fumiaki');
+INSERT INTO test_table (email, name) VALUES ('a.jp', 'taro');

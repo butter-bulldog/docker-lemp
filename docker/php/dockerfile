@@ -1,6 +1,6 @@
 # dockerのイメージは本ファイルから生成
 
-FROM php:7.4-fpm
+FROM php:8.0-fpm
 
 # イメージのビルド時に実行するコマンド
 RUN apt-get update && \

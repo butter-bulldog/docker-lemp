@@ -1,7 +1,7 @@
-# dockerLEMP
+# docker-lemp
 
 * Nginx
-* PHP7.4-fpm
+* PHP8.0-fpm
 * MySQL
 * phpMyAdmin
 
